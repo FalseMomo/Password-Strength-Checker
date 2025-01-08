@@ -22,6 +22,12 @@ def strength_checker(password, filename="Password-Strength-Checker/10-million-pa
     if not re.findall('[A-Z]+', password):
         return 'This password must contain at least one uppercase letter. Please use a different password!'
     
+    if not re.findall('[0-9]+', password):
+        return 'This password must contain at least one digit. Please use a different password!'
+    
+    if not re.findall('[!@$%^&*+#;:<>?,.~`]+', password):
+        return 'This password must contain at least one special character. Please use a different password!'
+    
     return 'This password is strong.'
                 
 

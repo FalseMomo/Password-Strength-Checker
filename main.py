@@ -13,8 +13,9 @@ def strength_checker(password, filename="Password-Strength-Checker/10-million-pa
             for line in file:
                 word = line.strip()
                 word_set.add(word)
-                if password in word_set:
-                    return 'This password has been identified as a common password. Please use a different password!'
+        
+        if password in word_set:
+            return 'This password has been identified as a common password. Please use a different password!'
 
     # handles FileNotFound error                
     except FileNotFoundError:
@@ -36,7 +37,7 @@ def strength_checker(password, filename="Password-Strength-Checker/10-million-pa
     if not re.findall('[!@$%^&*+#;:<>?,.~`()-_={/}[]|\\]+', password):
         return 'This password must contain at least one special character. Please use a different password!'
     
-    return 'This password is strong.'
+    return 'This password passes all of the basic requirements for a strong password.'
                 
 
 def main():

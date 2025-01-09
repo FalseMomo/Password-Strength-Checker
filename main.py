@@ -34,7 +34,7 @@ def strength_checker(password, filename="Password-Strength-Checker/10-million-pa
         return 'This password must contain at least one digit. Please use a different password!'
     
     # checks if there is at least 1 special character in the password (according to cisa.gov)
-    if not re.findall('[!@$%^&*+#;:<>?,.~`()-_={/}[]|\\]+', password):
+    if not re.findall('[!@$%^&*+#;:<>?,.~`("\')-_={/}[]|\\]+', password):
         return 'This password must contain at least one special character. Please use a different password!'
     
     return 'This password passes all of the basic requirements for a strong password.'

@@ -17,6 +17,11 @@ def strength_checker(password, filename="Password-Strength-Checker/10-million-pa
         if password in word_set:
             return 'This password has been identified as a common password. Please use a different password!'
 
+        lower_password = password.lower()
+        for word in word_set:
+            if word in lower_password:
+                return "This password contains a common password. Please use a different password!"
+
     # handles FileNotFound error                
     except FileNotFoundError:
         return "Cannot find the common passwords text file!"

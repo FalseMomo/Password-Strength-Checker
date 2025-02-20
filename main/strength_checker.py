@@ -6,6 +6,7 @@ def strength_checker(password, filename="Password-Strength-Checker/10-million-pa
     This is a program to check the strength of the password based on a set of specified criteria
     """
 
+    issues = []
     checker = False
 
     # parses a common passwords text file to check if the given password is a common password
@@ -17,7 +18,7 @@ def strength_checker(password, filename="Password-Strength-Checker/10-million-pa
                 word_set.add(word)
         
         if password in word_set:
-            print ('This password has been identified as a common password. Please use a different password!')
+            issues.append ('This password has been identified as a common password. Please use a different password!')
             checker = True
 
         lower_password = password.lower()
@@ -28,37 +29,37 @@ def strength_checker(password, filename="Password-Strength-Checker/10-million-pa
 
     # handles FileNotFound error                
     except FileNotFoundError:
-        print ("Cannot find the common passwords text file!")
+        issues.append ("Cannot find the common passwords text file!")
         checker = True
             
     # checks if the length of the password is at least 16 characters long (according to cisa.gov)
     if len(password) < 16:
-        print ('This password must be at least 16 characters long. Please use a different password!')
+        issues.append ('This password must be at least 16 characters long.')
         checker = True
     
     # checks if there is at least 1 uppercase letter in the password (according to cisa.gov)
     if not re.findall('[A-Z]+', password):
-        print ('This password must contain at least one uppercase letter. Please use a different password!')
+        issues.append ('This password must contain at least one uppercase letter. ')
         checker = True
     
     # checks if there is at least 1 digit in the password (according to cisa.gov)
     if not re.findall('[0-9]+', password):
-        print ('This password must contain at least one digit. Please use a different password!')
+        issues.append ('This password must contain at least one digit.')
         checker = True
     
     # checks if there is at least 1 special character in the password (according to cisa.gov)
     if not re.findall('[!@$%^&*+#;:<>?,.~`("\')-_={/}[]|\\]+', password):
-        print ('This password must contain at least one special character. Please use a different password!')
+        issues.append ('This password must contain at least one special character.')
         checker = True
     
     # checks if the requirements for a strong password have been met
     if (not checker):
         # checks if the password has a common password inside of it
         if (common_password_notifier):
-            return 'This password passes all of the basic requirements for a strong password.' + \
+            return 'This password is strong and meets all of the security requirements.' + \
             ' Just be aware that the program detected a common password somewhere in your password!'
         else: 
-            return 'This password passes all of the basic requirements for a strong password.'
+            return 'This password is strong and meets all of the security requirements.'
     else: 
-        return 'Your password is not strong enough. Please consider modifying it or using a different password!'
+        return 'Your password is not strong enough. Please address the following issues: \n- ' + '\n- '.join(issues) 
                 
